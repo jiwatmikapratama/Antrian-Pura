@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "53081554359",
+    "project_id": "ara-antrian-pura",
+    "storage_bucket": "ara-antrian-pura.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:53081554359:android:8eb8591ee1fdfddaa83c32",
+        "android_client_info": {
+          "package_name": "com.example.ara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "53081554359-ruf8keogbdb1otumf50nifjjhg6236mg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCzgyxu0h9AdnpZeebmgdXnVkt3zQz9RSU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "53081554359-ruf8keogbdb1otumf50nifjjhg6236mg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
