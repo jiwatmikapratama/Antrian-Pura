@@ -32,10 +32,16 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(onPressed: () {
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF189AB4),
+        child: Icon(Icons.add,),
+        onPressed: () {
         
+
+      },
         
-      },),
+      
+      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Color(0xFF189AB4),
@@ -165,7 +171,7 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
             puraList[index]["nama"],
           ),
           subtitle:  Text(puraList[index]["Alamat"]),
-trailing: Icon(Icons.food_bank),
+trailing: Icon(Icons.delete),
         );
       });
 }
