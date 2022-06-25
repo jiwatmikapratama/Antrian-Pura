@@ -14,14 +14,14 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ara/firestore/datamanagement.dart';
 
-class Beranda_login extends StatefulWidget {
-  const Beranda_login({Key? key}) : super(key: key);
+class Homepage_Admin extends StatefulWidget {
+  const Homepage_Admin({Key? key}) : super(key: key);
 
   @override
-  State<Beranda_login> createState() => _Beranda_loginState();
+  State<Homepage_Admin> createState() => _Homepage_AdminState();
 }
 
-class _Beranda_loginState extends State<Beranda_login> {
+class _Homepage_AdminState extends State<Homepage_Admin> {
   final users = FirebaseAuth.instance;
   List puraList = [];
 
@@ -32,6 +32,10 @@ class _Beranda_loginState extends State<Beranda_login> {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        
+        
+      },),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Color(0xFF189AB4),
@@ -161,8 +165,7 @@ class _Beranda_loginState extends State<Beranda_login> {
             puraList[index]["nama"],
           ),
           subtitle:  Text(puraList[index]["Alamat"]),
-
-
+trailing: Icon(Icons.food_bank),
         );
       });
 }

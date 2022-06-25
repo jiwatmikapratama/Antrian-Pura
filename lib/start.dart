@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:ara/pages/beranda_login.dart';
 import 'package:ara/pages/daftar.dart';
+import 'package:ara/pages/homepage_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -102,13 +103,30 @@ class _LoginState extends State<Login> {
                                     email: emailController.text,
                                     password: passwordController.text);
                             if (newUser != null) {
-                              print('berhasil');
+                              if (emailController.text == "admin@gmail.com") {
+                                print('berhasil');
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Homepage_Admin(),
+                                ),
+                              );
+                              } else {
+                                print('berhasil');
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => Beranda_login(),
                                 ),
                               );
+                              }
+                              // print('berhasil');
+                              // Navigator.push(
+                              //   context,
+                              //   MaterialPageRoute(
+                              //     builder: (context) => Beranda_login(),
+                              //   ),
+                              // );
                             }
                           } catch (e) {
                             print(e);
