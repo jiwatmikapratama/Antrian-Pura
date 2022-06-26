@@ -4,7 +4,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ara/start.dart';
+import 'package:ara/login.dart';
 import 'package:ara/pages/daftar_pengelola.dart';
 import 'package:ara/pages/pengaturan.dart';
 import 'package:ara/pages/riwayat.dart';
@@ -13,6 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ara/firestore/datamanagement.dart';
+import 'package:ara/pages/tambah_data.dart';
 
 class Homepage_Admin extends StatefulWidget {
   const Homepage_Admin({Key? key}) : super(key: key);
@@ -29,14 +30,16 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
     final db = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
-    FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    CollectionReference pura = firestore.collection('pura');
+    
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         backgroundColor: Color(0xFF189AB4),
         child: Icon(Icons.add,),
         onPressed: () {
-        
+            Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Tambah_Pura()));
 
       },
         
@@ -165,13 +168,42 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
       itemCount: puraList.length,
       separatorBuilder: (BuildContext context, int index) => const Divider(),
       itemBuilder: (BuildContext context, int index) {
-        return ListTile(
-          
-          title: Text(
-            puraList[index]["nama"],
+        return SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              ListTile(
+                        
+                title: Text(
+                  puraList[index]["nama"],
+                ),
+                subtitle:  Text(puraList[index]["alamat"]),
+                
+              ),
+              IconButton(onPressed:
+              (){
+                FirebaseFirestore.instance
+                          .collection("pura")
+                          .where("nama",
+                              isEqualTo:
+                                  puraList[index]["nama"].toString())
+                          .get()
+                          .then((value) {
+                        value.docs.forEach((element) {
+                          FirebaseFirestore.instance
+                              .collection("pura")
+                              .doc(element.id)
+                              .delete()
+                              .then((value) {
+                            print("Berhasil");
+                          });
+                        });
+                      });
+                      setState(() {});
+              }
+              , icon: Icon(Icons.delete)),
+            ],
           ),
-          subtitle:  Text(puraList[index]["Alamat"]),
-trailing: Icon(Icons.delete),
         );
       });
 }

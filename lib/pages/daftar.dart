@@ -1,10 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ara/start.dart';
+import 'package:ara/login.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'dart:convert';
+
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Daftar extends StatefulWidget {
   const Daftar({Key? key}) : super(key: key);
@@ -125,7 +127,18 @@ class _DaftarState extends State<Daftar> {
                                           builder: (context) => Login()));
                                 }
                               } catch (e) {
-                                print(e);
+                                var sg = e;
+                                Alert(context: context,
+                                title: "Register Warning",
+                                image: Image.asset('images/false.png'),
+                                style: alertStyle,
+                                desc: sg.toString(),
+                                buttons: [
+                                  DialogButton(child: Text("OK"), onPressed: () => Navigator.pop(context),
+                                  )
+                                ]
+                                ).show();
+                                print(sg);
                               }
                             },
                             child: Text(

@@ -4,7 +4,7 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:ara/start.dart';
+import 'package:ara/login.dart';
 import 'package:ara/pages/daftar_pengelola.dart';
 import 'package:ara/pages/pengaturan.dart';
 import 'package:ara/pages/riwayat.dart';
@@ -160,7 +160,7 @@ class _Beranda_loginState extends State<Beranda_login> {
           title: Text(
             puraList[index]["nama"],
           ),
-          subtitle:  Text(puraList[index]["Alamat"]),
+          subtitle:  Text(puraList[index]["alamat"]),
 
 
         );

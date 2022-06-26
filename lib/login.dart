@@ -7,6 +7,7 @@ import 'package:ara/pages/homepage_admin.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 // void main() {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,25 @@ import 'package:firebase_database/firebase_database.dart';
 //     ),
 //   );
 // }
+
+var alertStyle = AlertStyle(
+      animationType: AnimationType.fromTop,
+      isCloseButton: false,
+      isOverlayTapDismiss: false,
+      descStyle: TextStyle(fontWeight: FontWeight.bold),
+      descTextAlign: TextAlign.start,
+      animationDuration: Duration(milliseconds: 400),
+      alertBorder: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(0.0),
+        side: BorderSide(
+          color: Colors.grey,
+        ),
+      ),
+      titleStyle: TextStyle(
+        color: Colors.red,
+      ),
+      alertAlignment: Alignment.center,
+    );
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -127,9 +147,23 @@ class _LoginState extends State<Login> {
                               //     builder: (context) => Beranda_login(),
                               //   ),
                               // );
-                            }
+                            } 
                           } catch (e) {
-                            print(e);
+                           var sg = e;
+                           Alert(
+                                context: context,
+                                image: Image.asset('images/false.png'),
+                                title: "Login Warning",
+                                style: alertStyle,
+                                desc: sg.toString(),
+                                buttons: [
+                                  DialogButton(child: Text(
+                                    "OK"
+                                  ), onPressed: ()=> Navigator.pop(context)
+                                  )
+                                ]
+                              ).show();
+                            print(sg);
                           }
                         },
                         // Navigator.push(
