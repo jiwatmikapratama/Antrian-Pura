@@ -25,12 +25,12 @@ class _RiwayatState extends State<Riwayat> {
     CollectionReference riwayat = firestore.collection('riwayat');
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF189AB4),
         title: Text(
           'Riwayat',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
           // Container(

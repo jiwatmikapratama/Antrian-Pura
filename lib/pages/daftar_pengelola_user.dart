@@ -3,27 +3,24 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ara/login.dart';
-import 'package:ara/pages/daftar_pengelola.dart';
 import 'package:ara/pages/pengaturan.dart';
 import 'package:ara/pages/riwayat.dart';
 import 'package:ara/pages/detail_profil.dart';
-import 'package:ara/pages/tambah_data.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:ara/firestore/datamanagement.dart';
-import 'package:ara/pages/daftar_pengelola_user.dart';
 
-class Homepage_Admin extends StatefulWidget {
-  const Homepage_Admin({Key? key}) : super(key: key);
+class Daftar_Pengelola_User extends StatefulWidget {
+  const Daftar_Pengelola_User({Key? key}) : super(key: key);
 
   @override
-  State<Homepage_Admin> createState() => _Homepage_AdminState();
+  State<Daftar_Pengelola_User> createState() => _Daftar_Pengelola_UserState();
 }
 
-class _Homepage_AdminState extends State<Homepage_Admin> {
+class _Daftar_Pengelola_UserState extends State<Daftar_Pengelola_User> {
   final users = FirebaseAuth.instance;
-  List puraList = [];
+  List pengelolaList = [];
 
   final db = FirebaseFirestore.instance;
 
@@ -32,16 +29,6 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        backgroundColor: Color(0xFF189AB4),
-        child: Icon(
-          Icons.add,
-        ),
-        onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => Tambah_Pura()));
-        },
-      ),
       appBar: AppBar(
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF189AB4),
@@ -81,8 +68,8 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
               );
             }
             if (snapshot.connectionState == ConnectionState.done) {
-              puraList = snapshot.data as List;
-              return buildItems(puraList);
+              pengelolaList = snapshot.data as List;
+              return buildItems(pengelolaList);
             }
             return const Center(child: CircularProgressIndicator());
           },
@@ -150,10 +137,8 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
                   color: Colors.black,
                 ),
               ),
-              onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => Daftar_Pengelola_User())),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Daftar_Pengelola_User())),
             ),
             ListTile(
               leading: Icon(
@@ -175,9 +160,9 @@ class _Homepage_AdminState extends State<Homepage_Admin> {
     );
   }
 
-Widget buildItems(puraList) => ListView.separated(
+  Widget buildItems(pengelolaList) => ListView.separated(
       padding: const EdgeInsets.all(8),
-      itemCount: puraList.length,
+      itemCount: pengelolaList.length,
       separatorBuilder: (BuildContext context, int index) => const Divider(),
       itemBuilder: (BuildContext context, int index) {
         return SingleChildScrollView(
@@ -187,23 +172,23 @@ Widget buildItems(puraList) => ListView.separated(
               ListTile(
                         
                 title: Text(
-                  puraList[index]["nama"],
+                  pengelolaList[index]["nama"],
                 ),
-                subtitle:  Text(puraList[index]["alamat"]),
+                subtitle:  Text(pengelolaList[index]["alamat"]),
                 
               ),
               IconButton(onPressed:
               (){
                 FirebaseFirestore.instance
-                          .collection("pura")
-                          .where("nama",
+                          .collection("riwayat")
+                          .where("nama_pura",
                               isEqualTo:
-                                  puraList[index]["nama"].toString())
+                                  pengelolaList[index]["nama_pura"].toString())
                           .get()
                           .then((value) {
                         value.docs.forEach((element) {
                           FirebaseFirestore.instance
-                              .collection("pura")
+                              .collection("riwayat")
                               .doc(element.id)
                               .delete()
                               .then((value) {
@@ -221,7 +206,7 @@ Widget buildItems(puraList) => ListView.separated(
 }
 
 class DataSearch extends SearchDelegate<String> {
-  final pura = ["Besakih", "Tanah Lot", "Uluwatu"];
+  final pengelola = ["Besakih", "Tanah Lot", "Uluwatu"];
 
   final recentPura = ["Besakih", "Tanah Lot"];
 
@@ -266,7 +251,7 @@ class DataSearch extends SearchDelegate<String> {
     // TODO: implement buildSuggestions
     final suggestionList = query.isEmpty
         ? recentPura
-        : pura.where((p) => p.startsWith(query)).toList();
+        : pengelola.where((p) => p.startsWith(query)).toList();
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(

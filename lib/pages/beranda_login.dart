@@ -32,13 +32,21 @@ class _Beranda_loginState extends State<Beranda_login> {
     FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Color(0xFF189AB4),
+        child:Text('Daftar Pengelola'),
+        onPressed: () {
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => Daftar_pengelola()));
+        },
+      ),
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Color(0xFF189AB4),
         title: Text(
           'Search',
           style: TextStyle(
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
         actions: [
